@@ -1,27 +1,70 @@
-import React, { Component } from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import React, { Component, Fragment } from "react";
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Polygon,
+} from "react-google-maps";
+import AppMarker from "./AppMarker";
+import districts from "./data/districts";
 
-const mapStyles = {
-  width: '100%',
-  height: '100%'
-};
+class AppMap extends Component {
+  static defaultProps = {
+    googleMapURL:
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyBWpIIadZEDaL-h6EpY427OIVhCSllpDe4",
+  };
 
-export class AppMap extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  CMap = withScriptjs(
+    withGoogleMap((props) => (
+      <GoogleMap
+        defaultZoom={10}
+        defaultCenter={{ lat: 40.711991, lng: -73.972949 }}
+      >
+        {props.children}
+      </GoogleMap>
+    ))
+  );
+
   render() {
+    const features = districts.features.map((feature) => {
+      const coordinates = feature.geometry.coordinates[0];
+      const coordArr = coordinates
+        ? coordinates.map((c) => ({ lat: c[1], lng: c[0] }))
+        : [];
+
+      return (
+        <Polygon
+          path={coordArr}
+          options={{
+            strokeColor: "#fc1e0d",
+            strockOpacity: 1,
+            strocWeight: 1,
+          }}
+        />
+      );
+    });
     return (
-      <Map
-        google={this.props.google}
-        zoom={14}
-        style={mapStyles}
-        initialCenter={{
-         lat: -1.2884,
-         lng: 36.8233
-        }}
-      />
+      <Fragment>
+        <this.CMap
+          googleMapURL={this.props.googleMapURL}
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `700px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        >
+          <AppMarker
+            lat={40.711991}
+            lng={-73.972949}
+            name="My Marker"
+            color="blue"
+          />
+          {features}
+        </this.CMap>
+      </Fragment>
     );
   }
 }
-
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDVOQwALz2JdI7FV6bUJfCcfGFLbn8zhOAE'
-})(AppMap);
+export default AppMap;

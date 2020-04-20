@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import "./EpicMenu.css";
 import searchIcon from "./search-icon.png";
+import { NavLink } from "react-router-dom";
+import logo from "./logo.png";
+
+const links = [
+  { label: "Home", link: "/" },
+  { label: "Map", link: "/map" },
+  { label: "Event List", link: "/event" },
+  { label: "About", link: "/about" },
+];
 
 class EpicMenu extends Component {
   constructor() {
@@ -29,15 +38,15 @@ class EpicMenu extends Component {
     //   ""
     // );
 
-    let linksMarkup = this.props.links.map((link, index) => {
-      let linkMarkup = link.active ? (
-        <a className="menu__link menu__link--active" href={link.link}>
+    let linksMarkup = links.map((link, index) => {
+      let linkMarkup = (
+        <NavLink
+          className="menu__link menu__link"
+          to={link.link}
+          activeClassName="menu__link menu__link--active"
+        >
           {link.label}
-        </a>
-      ) : (
-        <a className="menu__link" href={link.link}>
-          {link.label}
-        </a>
+        </NavLink>
       );
 
       return (
