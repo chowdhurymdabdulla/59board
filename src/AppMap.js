@@ -1,12 +1,14 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState } from "react";
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Polygon,
 } from "react-google-maps";
+
 import AppMarker from "./AppMarker";
 import districts from "./data/districts";
+import './map.css';
 
 class AppMap extends Component {
   static defaultProps = {
@@ -16,6 +18,17 @@ class AppMap extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      isOpen: false,
+      selectedDistrict: null,
+      clickedLatlng: { lat: 0, lng: 0 },
+    };
+  }
+
+  openInfoBox(event, properties) {
+    console.log(event, properties);
+    this.setState({ clickedLatlng: event.latLng });
   }
 
   CMap = withScriptjs(
@@ -37,12 +50,16 @@ class AppMap extends Component {
         : [];
 
       return (
-        <Polygon
+        <Polygon className = "appMap"
           path={coordArr}
           options={{
-            strokeColor: "#fc1e0d",
-            strockOpacity: 1,
-            strocWeight: 1,
+            strokeColor: "#18a0fb",
+            // strockOpacity: 0,
+            // strocWeight: 1     
+          }}
+          onClick={(event) => {
+            this.props.onPolygonClick(feature.properties);
+            this.openInfoBox(event, feature.properties);
           }}
         />
       );
@@ -62,6 +79,7 @@ class AppMap extends Component {
             color="blue"
           />
           {features}
+          {this.props.children}
         </this.CMap>
       </Fragment>
     );

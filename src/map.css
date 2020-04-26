@@ -1,3 +1,6 @@
 .float {
-  display: absolute;
+  display: flex;
+}
+.mapTable {
+  margin-top: -30px;
 }
