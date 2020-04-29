@@ -4,3 +4,7 @@
 .mapTable {
   margin-top: -30px;
 }
+
+.error {
+  background-color: red;
+}

@@ -7,8 +7,7 @@ import {
 } from "react-google-maps";
 
 import AppMarker from "./AppMarker";
-import districts from "./data/districts";
-import './map.css';
+import "./map.css";
 
 class AppMap extends Component {
   static defaultProps = {
@@ -21,7 +20,6 @@ class AppMap extends Component {
 
     this.state = {
       isOpen: false,
-      selectedDistrict: null,
       clickedLatlng: { lat: 0, lng: 0 },
     };
   }
@@ -43,19 +41,25 @@ class AppMap extends Component {
   );
 
   render() {
-    const features = districts.features.map((feature) => {
+    const features = this.props.districts.features.map((feature) => {
       const coordinates = feature.geometry.coordinates[0];
       const coordArr = coordinates
         ? coordinates.map((c) => ({ lat: c[1], lng: c[0] }))
         : [];
 
+      const selected =
+        this.props.selectedDistrict === feature.properties.BoroCD;
+
       return (
-        <Polygon className = "appMap"
+        <Polygon
+          className="appMap"
           path={coordArr}
           options={{
-            strokeColor: "#18a0fb",
-            // strockOpacity: 0,
-            // strocWeight: 1     
+            strokeColor: "#3f3f3f",
+            strokeWeight: selected ? 3 : 1,
+            strokeOpacity: 0.8,
+            fillColor: selected ? "#fdae6b" : "#f0f0f0",
+            fillOpacity: 0.3,
           }}
           onClick={(event) => {
             this.props.onPolygonClick(feature.properties);
@@ -79,7 +83,6 @@ class AppMap extends Component {
             color="blue"
           />
           {features}
-          {this.props.children}
         </this.CMap>
       </Fragment>
     );
