@@ -34,7 +34,7 @@ function Home() {
     const size = useWindowSize()
 
     function _expandSideContent(){
-        setSideContentExpanded(true)
+        setSideContentExpanded(!sideContentExpanded)
     }
 
     return (
@@ -54,7 +54,7 @@ function Home() {
             </Content>
             <SideContent expanded={sideContentExpanded}>
                 {/*when width is mobile and sideContent hasn't been expanded overlay with expand "button"*/}
-                {size.width <= 768 ? <ExpandOverlay onClick={_expandSideContent} expanded={sideContentExpanded}>Expand map</ExpandOverlay>: null}
+                {size.width <= 768 ? <ExpandOverlay onClick={_expandSideContent} expanded={sideContentExpanded}/>: null}
             </SideContent>
         </Main>
     )
