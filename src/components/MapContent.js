@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import AppMap from "./AppMap";
 import DistrictSearch from "./DistrictSearch";
@@ -10,21 +10,21 @@ const Container = styled.div`
 `;
 
 const MapContent = () => {
-  function onPolygonClick(properties) {
-    setSelectedDistrict(properties.BoroCD);
-    console.log(selectedDistrict);
-  }
+    const [selectedDistrict, setSelectedDistrict] = useState(null)
 
-  return (
-    <>
-    <AppMap
-      onPolygonClick={onPolygonClick}
-      selectedDistrict={selectedDistrict}
-      districts={districts}
-    />
-    <DistrictSearch/>
-    </>
-  );
+    return (
+        <>
+            <AppMap
+                selectedDistrict={selectedDistrict}
+                setSelectedDistrict={setSelectedDistrict}
+                districts={districts}
+            />
+            <DistrictSearch
+                districts={districts}
+                setSelectedDistrict={setSelectedDistrict}
+            />
+        </>
+    );
 };
 
 export default MapContent;

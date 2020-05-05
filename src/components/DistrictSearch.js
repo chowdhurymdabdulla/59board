@@ -1,27 +1,30 @@
-import React, { useState } from react
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const Input = styled.input`
-
+  
 `
 
-const DistrictSearch = ({districts}) => { 
-    const [searchValue, setSearchValue] = ''
-    const [isValidSearchValue, setIsValidSearchValue] = true
+const DistrictSearch = ({districts, setSelectedDistrict}) => {
+    const [searchValue, setSearchValue] = useState('')
+    const [isValidSearchValue, setIsValidSearchValue] = useState(false)
 
-    function _searchSubmit(){
-
+    function _searchSubmit(event){
+        if(isValidSearchValue){
+            setSelectedDistrict(searchValue)
+        }
+        event.preventDefault();
     }
 
-    checkDistrict(districtNum) {
+    function checkDistrict(districtNum){
         return districts.features.some(
-          (feature) => feature.properties.BoroCD === boroCD
+          (feature) => feature.properties.BoroCD === districtNum
         )
       }
       
 
     function _searchChange(event){
-        const districtNum = event.target.value
+        const districtNum = parseInt(event.target.value)
         if (!checkDistrict(districtNum)) {
           //if input not valid then set isValidSearchValue to false
           setIsValidSearchValue(false)

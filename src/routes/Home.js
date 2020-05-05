@@ -23,6 +23,7 @@ const SideContent = styled.div`
   flex: 1 1 229px;
   height: 100vh;
   background-color: #c6c6c6;
+  position: relative;
   box-shadow: -3px 0px 3px 0px rgba(161, 161, 161, 0.2);
 
   @media only screen and (max-width: 768px) {

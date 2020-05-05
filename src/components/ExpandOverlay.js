@@ -1,18 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Relative = styled.div`
-  position: relative;
-`;
-
-const Absolute = styled.div`
-  position: absolute;
-  z-index: 1000;
-  height: 100%;
-  width: 100%;
-`;
 
 const Overlay = styled.button`
+  position: absolute;
+  z-index: 1000;
   text-align: left;
   text-indent: -9999px;
   border: 0;
@@ -57,18 +49,12 @@ const Condense = styled.button`
   }
 `;
 
-const ExpandOverlay = ({ onClick, expanded }) => {
-  return !expanded ? (
-    <Relative>
-      <Overlay onClick={onClick}>Expand map</Overlay>
-    </Relative>
-  ) : (
-    <Relative>
-      <Absolute>
+const ExpandOverlay = ({onClick, expanded}) => {
+    return !expanded ? (
+        <Overlay onClick={onClick}>Expand map</Overlay>
+    ) : (
         <Condense onClick={onClick}>-</Condense>
-      </Absolute>
-    </Relative>
-  );
+    );
 };
 
 export default ExpandOverlay;
