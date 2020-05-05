@@ -1,36 +1,24 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import EpicMenu from "./EpicMenu";
-import Map from "./Map"
-import Home from "./Home";
+import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
+import './App.css';
 
-export default function App() {
+import Home from './routes/Home'
+
+
+function App() {
   return (
     <Router>
-      <div>
         <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/map">
-            <Map />
-          </Route>
-          <Route path="/">
-            <div>
-              <EpicMenu />
-              <Home />
-            </div>
-          </Route>
+            <Route path="/">
+                <Home />
+            </Route>
         </Switch>
-      </div>
     </Router>
   );
 }
 
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
+export default App;
