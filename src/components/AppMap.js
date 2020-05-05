@@ -7,7 +7,6 @@ import {
 } from "react-google-maps";
 
 import AppMarker from "./AppMarker";
-import "./map.css";
 
 class AppMap extends Component {
   static defaultProps = {
@@ -73,7 +72,7 @@ class AppMap extends Component {
         <this.CMap
           googleMapURL={this.props.googleMapURL}
           loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `700px` }} />}
+          containerElement={<div style={{ height: `100%` }} />}
           mapElement={<div style={{ height: `100%` }} />}
         >
           <AppMarker

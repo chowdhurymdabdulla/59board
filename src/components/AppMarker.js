@@ -1,5 +1,4 @@
 import React from "react";
-import "./Marker.css";
 
 const AppMarker = (props) => {
   const { color, name, id } = props;
