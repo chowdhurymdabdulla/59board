@@ -61,10 +61,11 @@ const DistrictsMap = ({districts, size, expand, selectedDistrict, setSelectedDis
             L.geoJSON(districts, {
                 onEachFeature: (feature,layer) => {
                     const {x, y, district} = feature.properties
+                    const html = parseInt(String(district).slice(1))
                     L.marker([y,x], {
                         icon: L.divIcon({
                             className: 'label',
-                            html: String(district).slice(1).replace('0',''),
+                            html,
                             iconSize: [10, 10]
                         })
                     }).addTo(map).on('click', () => {
