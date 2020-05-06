@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import ExpandOverlay from "../components/ExpandOverlay";
-import MapContent from "../components/MapContent";
+import DistrictsMap from "../components/DistrictsMap";
 import useWindowSize from "../utils/useWindowSize";
 import styled from "styled-components";
+import getDistrictData from "../utils/getDistrictData";
 
 const Main = styled.div`
   display: flex;
@@ -32,9 +33,18 @@ const SideContent = styled.div`
   }
 `;
 
-function Home() {
+const Home = () => {
   const [sideContentExpanded, setSideContentExpanded] = useState(false);
+  const [districts, setDistricts] = useState([])
+  const [selectedDistrict, setSelectedDistrict] = useState(null)
   const size = useWindowSize();
+
+  useEffect(() => {
+
+      //load data
+      getDistrictData().then(districts => setDistricts(districts))
+
+  },[])
 
   function _expandSideContent() {
     setSideContentExpanded(!sideContentExpanded);
@@ -56,6 +66,7 @@ function Home() {
           information from board websites and provides a feed for your calendar
           app's subscription feature.
         </p>
+        <h3>Selected District: {selectedDistrict}</h3>
       </Content>
       <SideContent expanded={sideContentExpanded}>
         {/*when width is mobile and sideContent hasn't been expanded overlay with expand "button"*/}
@@ -65,7 +76,13 @@ function Home() {
             expanded={sideContentExpanded}
           />
         ) : null}
-        <MapContent />
+        <DistrictsMap
+            districts={districts}
+            size={size}
+            expand={sideContentExpanded}
+            selectedDistrict={selectedDistrict}
+            setSelectedDistrict={setSelectedDistrict}
+        />
       </SideContent>
     </Main>
   );

@@ -1,24 +1,23 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import AppMap from "./AppMap";
 import DistrictSearch from "./DistrictSearch";
-import districts from "../data/districts";
-import district_info from "../data/district_info";
 
 const Container = styled.div`
-  height: 100vh;
+  height: 100%;
 `;
 
-const MapContent = () => {
+const MapContent = ({districts}) => {
     const [selectedDistrict, setSelectedDistrict] = useState(null)
+
+    useEffect(() => console.log(districts), [districts])
 
     return (
         <>
-            <AppMap
-                selectedDistrict={selectedDistrict}
-                setSelectedDistrict={setSelectedDistrict}
-                districts={districts}
-            />
+            {/*<AppMap*/}
+            {/*    selectedDistrict={selectedDistrict}*/}
+            {/*    setSelectedDistrict={setSelectedDistrict}*/}
+            {/*    districts={districts}*/}
+            {/*/>*/}
             <DistrictSearch
                 districts={districts}
                 setSelectedDistrict={setSelectedDistrict}

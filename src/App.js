@@ -9,12 +9,12 @@ import './App.css';
 import Home from './routes/Home'
 
 
-function App() {
+const App = () => {
   return (
     <Router>
         <Switch>
             <Route path="/">
-                <Home />
+                <Home/>
             </Route>
         </Switch>
     </Router>
