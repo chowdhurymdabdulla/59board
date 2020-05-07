@@ -1,9 +1,14 @@
 import React, {useEffect, useState} from "react";
+import styled from "styled-components";
+
 import ExpandOverlay from "../components/ExpandOverlay";
 import DistrictsMap from "../components/DistrictsMap";
+import ThisWeeksEvents from '../components/event/ThisWeeksEvents'
+
 import useWindowSize from "../utils/useWindowSize";
-import styled from "styled-components";
+
 import getDistrictData from "../utils/getDistrictData";
+import getEventsData from "../utils/getEventsData";
 
 const Main = styled.div`
   display: flex;
@@ -16,6 +21,7 @@ const Content = styled.div`
   margin: 20px auto;
   padding: 0 20px;
   color: #444444;
+  height: calc(100vh - 20px - 20px);
   overflow-y: auto;
   flex: 1 1 500px;
 `;
@@ -36,13 +42,14 @@ const SideContent = styled.div`
 const Home = () => {
   const [sideContentExpanded, setSideContentExpanded] = useState(false);
   const [districts, setDistricts] = useState([])
+  const [events, setEvents] = useState([])
   const [selectedDistrict, setSelectedDistrict] = useState(null)
   const size = useWindowSize();
 
   useEffect(() => {
-
       //load data
       getDistrictData().then(districts => setDistricts(districts))
+      getEventsData().then(events => setEvents(events))
 
   },[])
 
@@ -66,7 +73,13 @@ const Home = () => {
           information from board websites and provides a feed for your calendar
           app's subscription feature.
         </p>
-        <h3>Selected District: {selectedDistrict}</h3>
+
+        <h3>This Week’s Board Meetings</h3>
+        <ThisWeeksEvents events={events}/>
+
+        <hr/>
+        <h3>Events in Selected District: {selectedDistrict}</h3>
+
       </Content>
       <SideContent expanded={sideContentExpanded}>
         {/*when width is mobile and sideContent hasn't been expanded overlay with expand "button"*/}
