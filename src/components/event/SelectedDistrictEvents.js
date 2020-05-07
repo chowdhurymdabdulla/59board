@@ -1,5 +1,12 @@
-import EventCard from "./EventCard";
 import React from "react";
+import styled from 'styled-components'
+
+import EventCard from "./EventCard";
+
+const Events = styled.div`
+    max-height: 30rem;
+    overflow-y: auto;
+`
 
 const SelectedDistrictEvents = ({events, selectedDistrict}) => {
 
@@ -11,12 +18,12 @@ const SelectedDistrictEvents = ({events, selectedDistrict}) => {
     }
 
     return (
-        <>
+        <Events>
             {selectedEvents.length > 0 ? (
                 selectedEvents.map((event, i) => <EventCard event={event} showDistrict={true}
                                                             key={`selected-event-${i}`}/>)
             ) : <p>No events in database, check Community Board's website</p>}
-        </>
+        </Events>
     )
 }
 

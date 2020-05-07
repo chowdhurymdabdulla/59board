@@ -24,6 +24,7 @@ const Separator = styled.hr`
 
 const Details = styled.div`
     padding: 10px;
+    background-color: #fafaf3;
 `
 
 function getDistrictName(district) {

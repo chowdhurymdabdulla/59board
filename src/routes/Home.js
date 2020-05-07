@@ -65,7 +65,7 @@ const Home = () => {
   return (
     <Main>
       <Content>
-        <h2>59 Community Boards</h2>
+        <h1>59 Community Boards</h1>
         <p>
           New York City's government includes a system of 59 community board
           districts that offer a way for the public to get involved with local
@@ -79,12 +79,12 @@ const Home = () => {
           app's subscription feature.
         </p>
 
-        <h3>This Week’s Board Meetings</h3>
+        <h2>This Week’s Board Meetings</h2>
         <ThisWeeksEvents events={events}/>
 
         <hr/>
         <Input type="text" placeholder="Search community district by address, neighborhood or name"/>
-        <h3>Events in Selected District: {selectedDistrict}</h3>
+        <h2>Events in Selected District: {selectedDistrict}</h2>
         <SelectedDistrictEvents events={events} selectedDistrict={selectedDistrict}/>
 
       </Content>
