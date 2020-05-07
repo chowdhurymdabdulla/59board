@@ -20,8 +20,7 @@ const SelectedDistrictEvents = ({events, selectedDistrict}) => {
     return (
         <Events>
             {selectedEvents.length > 0 ? (
-                selectedEvents.map((event, i) => <EventCard event={event} showDistrict={true}
-                                                            key={`selected-event-${i}`}/>)
+                selectedEvents.map((event, i) => <EventCard event={event} key={`selected-event-${i}`}/>)
             ) : <p>No events in database, check Community Board's website</p>}
         </Events>
     )
