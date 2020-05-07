@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ExpandOverlay from "../components/ExpandOverlay";
 import DistrictsMap from "../components/DistrictsMap";
 import ThisWeeksEvents from '../components/event/ThisWeeksEvents'
+import SelectedDistrictEvents from "../components/event/SelectedDistrictEvents";
 
 import useWindowSize from "../utils/useWindowSize";
 
@@ -38,6 +39,10 @@ const SideContent = styled.div`
       props.expanded ? "35vh" : "10vh"}; // expand when clicked
   }
 `;
+
+const Input = styled.input`
+  width: calc(100% - 20px);
+`
 
 const Home = () => {
   const [sideContentExpanded, setSideContentExpanded] = useState(false);
@@ -78,7 +83,9 @@ const Home = () => {
         <ThisWeeksEvents events={events}/>
 
         <hr/>
+        <Input type="text" placeholder="Search community district by address, neighborhood or name"/>
         <h3>Events in Selected District: {selectedDistrict}</h3>
+        <SelectedDistrictEvents events={events} selectedDistrict={selectedDistrict}/>
 
       </Content>
       <SideContent expanded={sideContentExpanded}>
